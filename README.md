@@ -1,10 +1,10 @@
-# typescript-mix
+# typescript-box
 An enhanced version of the original typescript compiler.
 
 安装
 首先确保你已经安装了最近版本的node.js。然后执行如下命令就可以安装了：
 
-npm install -g typescript-mix
+npm install -g typescript-box
 
 
 运行
