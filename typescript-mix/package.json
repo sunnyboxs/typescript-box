@@ -1,7 +1,7 @@
 {
-    "name": "typescript-x",
+    "name": "typescript-mix",
     "author": "sunnyboxs",
-    "homepage": "https://github.com/sunnyboxs/typescript-x",
+    "homepage": "https://github.com/sunnyboxs/typescript-mix",
     "version": "2.7.3",
     "license": "Apache-2.0",
     "description": "An enhanced version of the original typescript compiler.",
@@ -13,11 +13,11 @@
         "javascript"
     ],
     "bugs": {
-        "url": "https://github.com/sunnyboxs/typescript-x/issues"
+        "url": "https://github.com/sunnyboxs/typescript-mix/issues"
     },
     "repository": {
         "type": "git",
-        "url": "https://github.com/sunnyboxs/typescript-x.git"
+        "url": "https://github.com/sunnyboxs/typescript-mix.git"
     },
     "main": "./lib/typescript.js",
     "typings": "./lib/typescript.d.ts",
