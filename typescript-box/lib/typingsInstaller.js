@@ -4789,6 +4789,7 @@ var ts;
     function diag(code, category, key, message) {
         return { code: code, category: category, key: key, message: message };
     }
+    ts.diag = diag;
     // tslint:disable-next-line variable-name
     ts.Diagnostics = {
         Unterminated_string_literal: diag(1002, ts.DiagnosticCategory.Error, "Unterminated_string_literal_1002", "Unterminated string literal."),
@@ -19875,6 +19876,7 @@ var ts;
 /// <reference path="parser.ts"/>
 var ts;
 (function (ts) {
+    var createCompilerDiagnostic = ts.createCompilerDiagnostic;
     /* @internal */
     ts.compileOnSaveCommandLineOption = { name: "compileOnSave", type: "boolean" };
     /* @internal */
@@ -20558,7 +20560,10 @@ var ts;
         },
         {
             name: "reorderFiles",
-            type: "boolean"
+            type: "boolean",
+            showInSimplifiedHelpView: true,
+            category: ts.Diagnostics.Advanced_Options,
+            description: ts.diag(1008600, ts.DiagnosticCategory.Message, "1008600", "编译排序."),
         }
     ];
     /* @internal */
@@ -20629,7 +20634,7 @@ var ts;
     }
     /* @internal */
     function createCompilerDiagnosticForInvalidCustomType(opt) {
-        return createDiagnosticForInvalidCustomType(opt, ts.createCompilerDiagnostic);
+        return createDiagnosticForInvalidCustomType(opt, createCompilerDiagnostic);
     }
     ts.createCompilerDiagnosticForInvalidCustomType = createCompilerDiagnosticForInvalidCustomType;
     function createDiagnosticForInvalidCustomType(opt, createDiagnostic) {
@@ -20684,12 +20689,12 @@ var ts;
                     var opt = getOptionFromName(s.slice(s.charCodeAt(1) === 45 /* minus */ ? 2 : 1), /*allowShort*/ true);
                     if (opt) {
                         if (opt.isTSConfigOnly) {
-                            errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.Option_0_can_only_be_specified_in_tsconfig_json_file, opt.name));
+                            errors.push(createCompilerDiagnostic(ts.Diagnostics.Option_0_can_only_be_specified_in_tsconfig_json_file, opt.name));
                         }
                         else {
                             // Check to see if no argument was provided (e.g. "--locale" is the last command-line argument).
                             if (!args[i] && opt.type !== "boolean") {
-                                errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.Compiler_option_0_expects_an_argument, opt.name));
+                                errors.push(createCompilerDiagnostic(ts.Diagnostics.Compiler_option_0_expects_an_argument, opt.name));
                             }
                             switch (opt.type) {
                                 case "number":
@@ -20725,7 +20730,7 @@ var ts;
                         }
                     }
                     else {
-                        errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.Unknown_compiler_option_0, s));
+                        errors.push(createCompilerDiagnostic(ts.Diagnostics.Unknown_compiler_option_0, s));
                     }
                 }
                 else {
@@ -20736,7 +20741,7 @@ var ts;
         function parseResponseFile(fileName) {
             var text = readFile ? readFile(fileName) : ts.sys.readFile(fileName);
             if (!text) {
-                errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.File_0_not_found, fileName));
+                errors.push(createCompilerDiagnostic(ts.Diagnostics.File_0_not_found, fileName));
                 return;
             }
             var args = [];
@@ -20756,7 +20761,7 @@ var ts;
                         pos++;
                     }
                     else {
-                        errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.Unterminated_quoted_string_in_response_file_0, fileName));
+                        errors.push(createCompilerDiagnostic(ts.Diagnostics.Unterminated_quoted_string_in_response_file_0, fileName));
                     }
                 }
                 else {
@@ -20819,9 +20824,9 @@ var ts;
             text = readFile(fileName);
         }
         catch (e) {
-            return ts.createCompilerDiagnostic(ts.Diagnostics.Cannot_read_file_0_Colon_1, fileName, e.message);
+            return createCompilerDiagnostic(ts.Diagnostics.Cannot_read_file_0_Colon_1, fileName, e.message);
         }
-        return text === undefined ? ts.createCompilerDiagnostic(ts.Diagnostics.The_specified_path_does_not_exist_Colon_0, fileName) : text;
+        return text === undefined ? createCompilerDiagnostic(ts.Diagnostics.The_specified_path_does_not_exist_Colon_0, fileName) : text;
     }
     function commandLineOptionsToMap(options) {
         return ts.arrayToMap(options, function (option) { return option.name; });
@@ -21302,7 +21307,7 @@ var ts;
         }
         function createCompilerDiagnosticOnlyIfJson(message, arg0, arg1) {
             if (!sourceFile) {
-                errors.push(ts.createCompilerDiagnostic(message, arg0, arg1));
+                errors.push(createCompilerDiagnostic(message, arg0, arg1));
             }
         }
     }
@@ -21314,7 +21319,7 @@ var ts;
     /*@internal*/
     function getErrorForNoInputFiles(_a, configFileName) {
         var includeSpecs = _a.includeSpecs, excludeSpecs = _a.excludeSpecs;
-        return ts.createCompilerDiagnostic(ts.Diagnostics.No_inputs_were_found_in_config_file_0_Specified_include_paths_were_1_and_exclude_paths_were_2, configFileName || "tsconfig.json", JSON.stringify(includeSpecs || []), JSON.stringify(excludeSpecs || []));
+        return createCompilerDiagnostic(ts.Diagnostics.No_inputs_were_found_in_config_file_0_Specified_include_paths_were_1_and_exclude_paths_were_2, configFileName || "tsconfig.json", JSON.stringify(includeSpecs || []), JSON.stringify(excludeSpecs || []));
     }
     ts.getErrorForNoInputFiles = getErrorForNoInputFiles;
     function isSuccessfulParsedTsconfig(value) {
@@ -21328,7 +21333,7 @@ var ts;
         basePath = ts.normalizeSlashes(basePath);
         var resolvedPath = ts.getNormalizedAbsolutePath(configFileName || "", basePath);
         if (resolutionStack.indexOf(resolvedPath) >= 0) {
-            errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.Circularity_detected_while_resolving_configuration_Colon_0, resolutionStack.concat([resolvedPath]).join(" -> ")));
+            errors.push(createCompilerDiagnostic(ts.Diagnostics.Circularity_detected_while_resolving_configuration_Colon_0, resolutionStack.concat([resolvedPath]).join(" -> ")));
             return { raw: json || convertToObject(sourceFile, errors) };
         }
         var ownConfig = json ?
@@ -21361,7 +21366,7 @@ var ts;
     }
     function parseOwnConfigOfJson(json, host, basePath, configFileName, errors) {
         if (ts.hasProperty(json, "excludes")) {
-            errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.Unknown_option_excludes_Did_you_mean_exclude));
+            errors.push(createCompilerDiagnostic(ts.Diagnostics.Unknown_option_excludes_Did_you_mean_exclude));
         }
         var options = convertCompilerOptionsFromJsonWorker(json.compilerOptions, basePath, errors, configFileName);
         // typingOptions has been deprecated and is only supported for backward compatibility purposes.
@@ -21371,11 +21376,11 @@ var ts;
         var extendedConfigPath;
         if (json.extends) {
             if (!ts.isString(json.extends)) {
-                errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.Compiler_option_0_requires_a_value_of_type_1, "extends", "string"));
+                errors.push(createCompilerDiagnostic(ts.Diagnostics.Compiler_option_0_requires_a_value_of_type_1, "extends", "string"));
             }
             else {
                 var newBase = configFileName ? directoryOfCombinedPath(configFileName, basePath) : basePath;
-                extendedConfigPath = getExtendsConfigPath(json.extends, host, newBase, errors, ts.createCompilerDiagnostic);
+                extendedConfigPath = getExtendsConfigPath(json.extends, host, newBase, errors, createCompilerDiagnostic);
             }
         }
         return { raw: json, options: options, typeAcquisition: typeAcquisition, extendedConfigPath: extendedConfigPath };
@@ -21533,7 +21538,7 @@ var ts;
                 defaultOptions[opt.name] = convertJsonOption(opt, jsonOptions[id], basePath, errors);
             }
             else {
-                errors.push(ts.createCompilerDiagnostic(diagnosticMessage, id));
+                errors.push(createCompilerDiagnostic(diagnosticMessage, id));
             }
         }
     }
@@ -21549,7 +21554,7 @@ var ts;
             return normalizeNonListOptionValue(opt, basePath, value);
         }
         else {
-            errors.push(ts.createCompilerDiagnostic(ts.Diagnostics.Compiler_option_0_requires_a_value_of_type_1, opt.name, getCompilerOptionValueTypeString(opt)));
+            errors.push(createCompilerDiagnostic(ts.Diagnostics.Compiler_option_0_requires_a_value_of_type_1, opt.name, getCompilerOptionValueTypeString(opt)));
         }
     }
     function normalizeOptionValue(option, basePath, value) {
@@ -21767,7 +21772,7 @@ var ts;
                     }
                 }
             }
-            return ts.createCompilerDiagnostic(message, spec);
+            return createCompilerDiagnostic(message, spec);
         }
     }
     function specToDiagnostic(spec, allowTrailingRecursion) {
