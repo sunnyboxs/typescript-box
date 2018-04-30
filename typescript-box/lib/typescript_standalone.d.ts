@@ -2822,7 +2822,7 @@ declare module "typescript" {
     const version: string;
 }
 declare module "typescript" {
-    const version_plus = "2.7.3";
+    const version_plus = "2.7.6";
 }
 declare module "typescript" {
     function isExternalModuleNameRelative(moduleName: string): boolean;

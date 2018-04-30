@@ -1503,7 +1503,7 @@ var ts;
     ts.version = ts.versionMajorMinor + ".2";
 })(ts || (ts = {}));
 (function (ts) {
-    ts.version_plus = "2.7.3";
+    ts.version_plus = "2.7.6";
 })(ts || (ts = {}));
 (function (ts) {
     function isExternalModuleNameRelative(moduleName) {
