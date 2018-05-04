@@ -2886,7 +2886,7 @@ declare namespace ts {
     const versionMajorMinor = "2.9";
     /** The version of the TypeScript compiler release */
     const version: string;
-    const version_x = "2.7.7";
+    const version_x = "2.7.8";
 }
 declare namespace ts {
     function isExternalModuleNameRelative(moduleName: string): boolean;
