@@ -20,7 +20,7 @@ sortFiles	boolean	false	根据依赖关系自动排序源文件列表，默认�
 
 
 # 开启排序
-打开tsconfig.json 在compilerOptions下添加"reorderFiles": true,
+打开tsconfig.json 在compilerOptions下添加"sortFiles": true,
 
 {
 	"compilerOptions": {
