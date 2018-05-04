@@ -1,4 +1,4 @@
-# typescript-box
+# typescript-box (TS编译器支持WebGL2.0)
 An enhanced version of the original typescript compiler.
 
 安装
