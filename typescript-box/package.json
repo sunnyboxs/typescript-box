@@ -2,7 +2,7 @@
     "name": "typescript-box",
     "author": "sunnyboxs",
     "homepage": "https://github.com/sunnyboxs/typescript-box",
-    "version": "2.7.6",
+    "version": "2.7.7",
     "license": "Apache-2.0",
     "description": "An enhanced version of the original typescript compiler.",
     "keywords": [
