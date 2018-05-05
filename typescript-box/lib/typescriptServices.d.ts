@@ -2886,7 +2886,7 @@ declare namespace ts {
     const versionMajorMinor = "2.9";
     /** The version of the TypeScript compiler release */
     const version: string;
-    const version_x = "2.7.8";
+    const version_x = "2.7.9";
 }
 declare namespace ts {
     function isExternalModuleNameRelative(moduleName: string): boolean;
@@ -4083,7 +4083,10 @@ declare namespace ts {
     function createAbstractBuilder(rootNames: ReadonlyArray<string>, options: CompilerOptions, host?: CompilerHost, oldProgram?: BuilderProgram, configFileParsingDiagnostics?: ReadonlyArray<Diagnostic>): BuilderProgram;
 }
 declare namespace ts {
+    var changeSourceFile: string;
     function reorderSourceFiles(program: Program): boolean;
+    function isReferenceFile(): boolean;
+    function getSortTime(): number;
 }
 declare namespace ts {
     type DiagnosticReporter = (diagnostic: Diagnostic) => void;

@@ -2886,7 +2886,7 @@ declare module "typescript" {
     const versionMajorMinor = "2.9";
     /** The version of the TypeScript compiler release */
     const version: string;
-    const version_x = "2.7.8";
+    const version_x = "2.7.9";
 }
 declare module "typescript" {
     function isExternalModuleNameRelative(moduleName: string): boolean;
@@ -4083,7 +4083,10 @@ declare module "typescript" {
     function createAbstractBuilder(rootNames: ReadonlyArray<string>, options: CompilerOptions, host?: CompilerHost, oldProgram?: BuilderProgram, configFileParsingDiagnostics?: ReadonlyArray<Diagnostic>): BuilderProgram;
 }
 declare module "typescript" {
+    var changeSourceFile: string;
     function reorderSourceFiles(program: Program): boolean;
+    function isReferenceFile(): boolean;
+    function getSortTime(): number;
 }
 declare module "typescript" {
     type DiagnosticReporter = (diagnostic: Diagnostic) => void;

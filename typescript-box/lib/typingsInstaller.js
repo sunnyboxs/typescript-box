@@ -1607,7 +1607,7 @@ var ts;
     ts.versionMajorMinor = "2.9";
     /** The version of the TypeScript compiler release */
     ts.version = ts.versionMajorMinor + ".0-dev";
-    ts.version_x = "2.7.8";
+    ts.version_x = "2.7.9";
 })(ts || (ts = {}));
 (function (ts) {
     function isExternalModuleNameRelative(moduleName) {

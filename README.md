@@ -1,44 +1,62 @@
-# typescript-box (TS编译器支持WebGL2.0)
+# typescript-box ( Support WebGL2.0 )
 An enhanced version of the original typescript compiler.
+Exactly the same as the tsc command！
+- Support TypeScript2.9.0-dev .
+- Support WebGL1.0,WebGL2.0 .
+- Support Sort ts files .
+- Support Visual Studio Code Ide .
+- Use npm publish，Thank！
+----
 
-安装
-首先确保你已经安装了最近版本的node.js。然后执行如下命令就可以安装了：
-
-npm install -g typescript-box
-
-
-# 运行
-直接在命令行调用 tsc-x 即可；
-
-tsc-x [input files] [options]
-命令行参数格式与原版tsc完全一致
+# How to install
+`npm install -g typescript-box`
 
 
-# 额外参数
-参数	类型	默认值	描述
-sortFiles	boolean	false	根据依赖关系自动排序源文件列表，默认为false关闭排序
+# How to use
+`tsc-x`
+
+`tsc-x --sortFiles`
+
+`tsc-x [input files] [options]`
+
+- Exactly the same as the tsc command.
+
+# Options
+| options        | value   |
+| --------   | -----:  |
+| sortFiles      | false/true   |
 
 
-# 开启排序
-打开tsconfig.json 在compilerOptions下添加"sortFiles": true,
+# How you can add to tsconfig.json
+`tsconfig.json`
+```javascript
+    {
+    	"compilerOptions": {
+    		"sortFiles": true,
+    		"target": "es5",
+    		"declaration": true,
+    		"sourceMap": true,
+    		"outFile": "bin/js/Main.js",
+    		"noImplicitAny": false,
+    		"removeComments": false
+    	},
+    	"exclude": [
+    		"node_modules",
+    		"bin"]
+    }
+```
 
-{
-	"compilerOptions": {
-		"sortFiles": true,
-		"target": "es5",
-		"declaration": true,
-		"sourceMap": true,
-		"outFile": "bin/js/Main.js",
-		"noImplicitAny": false,
-		"removeComments": false
-	},
-	"exclude": [
-		"node_modules",
-		"bin"]
-}
+# Use VSCode tsdk:
+`settings.json`
+```javascript
+    {
+        "typescript.tsdk": "C:/Users/xxxxxxx/AppData/Roaming/npm/node_modules/typescript-box/lib/"
+    }
+```
 
-# 切换vscode的typescript的sdk:
-settings.json
-{
-    "typescript.tsdk": "C:/Users/xxxxxxx/AppData/Roaming/npm/node_modules/typescript-box/lib/"
-}
+# Auto generate file:
+`src/reference.ts`
+- This saves the sorted list of dependent references.
+
+# About：
+- Welcome to use, if you have BUG also welcome feedback
